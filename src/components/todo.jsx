@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../utils/supabase";
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
 
 const Todo = () => {
   const [inputValue, setInputValue] = useState("");
@@ -9,12 +9,23 @@ const Todo = () => {
 
   const navigate = useNavigate();
 
-  const addTodo = () => {
+  const addTodo = async () => {
     if (inputValue.length == 0) return;
     if (editId === null) {
-      const newTodo = [...todo, { id: crypto.randomUUID(), name: inputValue }];
-      console.log(newTodo, "new");
-      setTodos(newTodo);
+      const { data, error } = await supabase
+        .from("todos")
+        .insert({ name: inputValue, active: true })
+        .select();
+
+      if (!!data) {
+        console.log(error, "---", data);
+        const newTodo = [
+          ...todo,
+          { id: crypto.randomUUID(), name: inputValue },
+        ];
+        console.log(newTodo, "new");
+        setTodos(newTodo);
+      }
     }
     if (!!editId) {
       const updateTodo = todo?.map((i) => {
@@ -44,6 +55,14 @@ const Todo = () => {
     await supabase.auth.signOut();
     navigate("/");
   };
+
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await supabase.from("todos").select();
+      return data;
+    };
+    getData().then((res) => setTodos(res));
+  }, []);
 
   return (
     <div className="flex justify-center flex-col p-20">
