@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-background: white;
+  --color-primary-text: black;
+  --color-bermuda: green;
+  --color-midnight: #e2e8f0;
+}
+
+.dark {
+  --color-primary-background: black;
+  --color-primary-text: white;
+  --color-bermuda: #1e293b;
+  --color-midnight: #cbd5e1;
+}
+
+@layer base {
+  h1 {
+    font-size: larger;
+  }
+}
+
+@layer components {
+  .card {
+    display: none;
+  }
+  .new-in:checked + .card {
+    display: block;
+  }
+  .underline-link {
+    color: red;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
