@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../utils/supabase";
+import { useNavigate } from "react-router-dom";
 
 const Todo = () => {
   const [inputValue, setInputValue] = useState("");
   const [todo, setTodos] = useState([]);
   const [editId, setEditId] = useState(null);
+
+  const navigate = useNavigate();
 
   const addTodo = () => {
     if (inputValue.length == 0) return;
@@ -39,6 +42,7 @@ const Todo = () => {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
+    navigate("/");
   };
 
   return (
