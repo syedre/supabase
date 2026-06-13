@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../utils/supabase";
 
 const ProtectedRoute = ({ children }) => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkUser = async () => {
@@ -17,10 +18,13 @@ const ProtectedRoute = ({ children }) => {
         navigate("/");
         return;
       }
+      setLoading(false);
     };
 
     checkUser();
   }, []);
+
+  if (loading) return <div>loading</div>;
 
   return children;
 };
