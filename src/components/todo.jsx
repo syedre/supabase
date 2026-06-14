@@ -10,7 +10,7 @@ const Todo = () => {
   const [editId, setEditId] = useState(null);
   const [img, setImg] = useState(null);
 
-  const { uid } = useContext(UserContext);
+  const { uid, setUserId } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -59,6 +59,7 @@ const Todo = () => {
   const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate("/");
+    setUserId(null);
   };
 
   useEffect(() => {

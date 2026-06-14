@@ -13,7 +13,7 @@ const ProtectedRoute = ({ children }) => {
       const {
         data: { user },
       } = await supabase.auth.getUser();
-      setUserId(user.id);
+      setUserId(user?.id);
 
       if (!user) {
         navigate("/");
@@ -28,7 +28,7 @@ const ProtectedRoute = ({ children }) => {
   if (loading) return <div>loading</div>;
 
   return (
-    <UserContext.Provider value={{ uid: userId }}>
+    <UserContext.Provider value={{ uid: userId, setUserId: setUserId }}>
       {children}
     </UserContext.Provider>
   );
