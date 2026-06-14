@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../utils/supabase";
 import { data, useNavigate } from "react-router-dom";
+import UploadImage from "./uploadImage";
 
 const Todo = () => {
   const [inputValue, setInputValue] = useState("");
   const [todo, setTodos] = useState([]);
   const [editId, setEditId] = useState(null);
+  const [img, setImg] = useState(null);
 
   const navigate = useNavigate();
 
@@ -62,6 +64,18 @@ const Todo = () => {
       return data;
     };
     getData().then((res) => setTodos(res));
+
+    const getImage = async () => {
+      const { data } = supabase.storage
+        .from("avatar")
+        .getPublicUrl(
+          "f1e33195-42b9-46c2-871f-d2021de7737f/profile/58e357f8-42d8-40b3-9638-abe0a343c9aa",
+        );
+      if (!!data) {
+        setImg(data?.publicUrl);
+      }
+    };
+    getImage();
   }, []);
 
   return (
@@ -97,6 +111,8 @@ const Todo = () => {
         })}
       </ul>
       <button onClick={handleLogout}>Logout</button>
+      <UploadImage />
+      <img src={img} alt="imgagsg" />
     </div>
   );
 };
