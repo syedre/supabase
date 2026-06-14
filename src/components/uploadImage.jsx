@@ -1,9 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { supabase } from "../utils/supabase";
+import { UserContext } from "../App";
 
 const UploadImage = () => {
-  const [userId, serUserId] = useState(null);
+  const { uid: userId } = useContext(UserContext);
+
   const ref = useRef();
+
   const handleFile = async (e) => {
     const avatarFile = event.target.files[0];
     const filePath = `${userId}/profile/${crypto.randomUUID()}`;
@@ -21,20 +24,8 @@ const UploadImage = () => {
     }
   };
 
-  useEffect(() => {
-    async function isUser() {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      serUserId(user.id);
-    }
-    isUser();
-  }, []);
-
   return (
     <div>
-      {/* Image */}
-
       <input ref={ref} type="file" onChange={(e) => handleFile(e)} />
       <button onClick={() => ref.current.click()}>upload</button>
     </div>

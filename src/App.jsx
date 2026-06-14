@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import "./App.css";
 import ExpandFolder from "./components/fileExplorer";
 import Tabs from "./components/compoundComponent";
@@ -15,6 +15,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./components/login";
 import ProtectedRoute from "./components/protectedRoute";
 
+export const UserContext = createContext();
 function App() {
   const [isDark, setIsDark] = useState(false);
 

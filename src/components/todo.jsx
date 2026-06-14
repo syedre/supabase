@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { supabase } from "../utils/supabase";
 import { data, useNavigate } from "react-router-dom";
 import UploadImage from "./uploadImage";
+import { UserContext } from "../App";
 
 const Todo = () => {
   const [inputValue, setInputValue] = useState("");
   const [todo, setTodos] = useState([]);
   const [editId, setEditId] = useState(null);
   const [img, setImg] = useState(null);
+
+  const { uid } = useContext(UserContext);
 
   const navigate = useNavigate();
 
