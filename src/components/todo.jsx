@@ -6,9 +6,8 @@ import { UserContext } from "../App";
 
 const Todo = () => {
   const [inputValue, setInputValue] = useState("");
-  const [todo, setTodos] = useState([]);
+  const [user, setUser] = useState();
   const [editId, setEditId] = useState(null);
-  const [img, setImg] = useState(null);
 
   const { uid, setUserId } = useContext(UserContext);
 
@@ -71,9 +70,7 @@ const Todo = () => {
     };
     getData().then((res) => {
       const [userData] = res;
-      const construct_img = `https://jabzndbdybeeugoypboz.supabase.co/storage/v1/object/public/avatar/${userData?.image_url}?t=${Date.now()}`;
-      setTodos(userData?.todos);
-      setImg(construct_img);
+      setUser(userData);
     });
   }, []);
 
@@ -99,7 +96,7 @@ const Todo = () => {
       </button>
 
       <ul className="list-decimal">
-        {todo?.map((i) => {
+        {user?.todos?.map((i) => {
           return (
             <li key={i?.id}>
               <span>{i?.name}</span>
@@ -110,8 +107,7 @@ const Todo = () => {
         })}
       </ul>
       <button onClick={handleLogout}>Logout</button>
-      <UploadImage />
-      <img src={img} alt="imgagsg" />
+      {!!user && <UploadImage imageData={user?.image_url} />}
     </div>
   );
 };
