@@ -41,10 +41,10 @@ export default function Login({}) {
   };
 
   return (
-    <div className="flex mx-auto flex-col w-[70%]">
+    <div className="flex mx-auto flex-col w-[70%] border border-gray-300 rounded-2xl px-10 py-10">
       <form
         onSubmit={handleLogin}
-        className="flex flex-col gap-4 max-w-sm mx-auto mt-10"
+        className="flex flex-col gap-4 max-w-sm mx-auto "
       >
         <input
           type="email"

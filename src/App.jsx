@@ -14,6 +14,7 @@ import Signup from "./components/signUp";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./components/login";
 import ProtectedRoute from "./components/protectedRoute";
+import AuthLayout from "./components/authLayout";
 
 export const UserContext = createContext();
 function App() {
@@ -29,8 +30,22 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/"
+          element={
+            <AuthLayout>
+              <Signup />
+            </AuthLayout>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <AuthLayout>
+              <Login />
+            </AuthLayout>
+          }
+        />
         <Route
           path="/todo"
           element={
