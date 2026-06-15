@@ -8,6 +8,7 @@ const Todo = () => {
   const [inputValue, setInputValue] = useState("");
   const [user, setUser] = useState();
   const [editId, setEditId] = useState(null);
+  const [todo, setTodos] = useState([]);
 
   const { uid, setUserId } = useContext(UserContext);
 
@@ -71,6 +72,7 @@ const Todo = () => {
     getData().then((res) => {
       const [userData] = res;
       setUser(userData);
+      setTodos(userData?.todos);
     });
   }, []);
 
@@ -96,7 +98,7 @@ const Todo = () => {
       </button>
 
       <ul className="list-decimal">
-        {user?.todos?.map((i) => {
+        {todo?.map((i) => {
           return (
             <li key={i?.id}>
               <span>{i?.name}</span>
