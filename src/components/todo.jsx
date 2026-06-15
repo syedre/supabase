@@ -64,22 +64,17 @@ const Todo = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const { data } = await supabase.from("todos").select();
+      const { data } = await supabase
+        .from("profile")
+        .select(`user_id,image_url,todos(id,name,active)`);
       return data;
     };
-    getData().then((res) => setTodos(res));
-
-    const getImage = async () => {
-      const { data } = supabase.storage
-        .from("avatar")
-        .getPublicUrl(
-          "f1e33195-42b9-46c2-871f-d2021de7737f/profile/58e357f8-42d8-40b3-9638-abe0a343c9aa",
-        );
-      if (!!data) {
-        setImg(data?.publicUrl);
-      }
-    };
-    getImage();
+    getData().then((res) => {
+      const [userData] = res;
+      const construct_img = `https://jabzndbdybeeugoypboz.supabase.co/storage/v1/object/public/avatar/${userData?.image_url}?t=${Date.now()}`;
+      setTodos(userData?.todos);
+      setImg(construct_img);
+    });
   }, []);
 
   return (

@@ -8,12 +8,14 @@ const UploadImage = () => {
   const ref = useRef();
 
   const handleFile = async (e) => {
-    const avatarFile = event.target.files[0];
-    const filePath = `${userId}/profile/${crypto.randomUUID()}`;
+    const avatarFile = e.target.files[0];
+    const newfilePath = `${userId}/logo/avatar`;
 
     const { data, error } = await supabase.storage
       .from("avatar")
-      .upload(filePath, avatarFile, {});
+      .upload(newfilePath, avatarFile, {
+        upsert: true,
+      });
     console.log(data, "image data");
 
     if (!!data) {
