@@ -41,14 +41,7 @@ export default function Login({}) {
   };
 
   return (
-    <div
-      style={{
-        background:
-          "repeating-linear-gradient(-45deg, transparent 0px, transparent 7px, #f9a8d4 10px, #f9a8d4 11px)",
-        padding: "4px",
-      }}
-      className="border border-gray-300 rounded-2xl shadow-2xl"
-    >
+    <div className="border border-gray-300 rounded-2xl shadow-2xl animated-border p-1">
       <div className="flex mx-auto flex-col border bg-white border-gray-300 rounded-2xl px-10 py-20">
         <form
           onSubmit={handleLogin}

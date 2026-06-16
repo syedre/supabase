@@ -35,4 +35,26 @@
     text-decoration: underline;
     cursor: pointer;
   }
+  .animated-border {
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent 0px,
+      transparent 7px,
+      var(--color-zinc-300) 10px,
+      var(--color-zinc-300) 11px
+    );
+    background-size: 20px 20px;
+    /* animation: moveStripes 2s linear infinite; */
+  }
+  .animated-border:hover {
+    animation: moveStripes 3s linear infinite;
+  }
+  @keyframes moveStripes {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 20px 20px;
+    }
+  }
 }
