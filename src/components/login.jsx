@@ -41,43 +41,52 @@ export default function Login({}) {
   };
 
   return (
-    <div className="flex mx-auto flex-col border border-gray-300 rounded-2xl px-10 py-20">
-      <form
-        onSubmit={handleLogin}
-        className="flex flex-col gap-4 max-w-sm mx-auto "
-      >
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          className="border p-2 rounded"
-        />
-
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          className="border p-2 rounded"
-        />
-
-        <button
-          type="submit"
-          disabled={loading}
-          className="bg-zinc-300 text-zinc-900 p-2 rounded border-zinc-400 border"
+    <div
+      style={{
+        background:
+          "repeating-linear-gradient(-45deg, transparent 0px, transparent 7px, #f9a8d4 10px, #f9a8d4 11px)",
+        padding: "4px",
+      }}
+      className="border border-gray-300 rounded-2xl shadow-2xl"
+    >
+      <div className="flex mx-auto flex-col border bg-white border-gray-300 rounded-2xl px-10 py-20">
+        <form
+          onSubmit={handleLogin}
+          className="flex flex-col gap-4 max-w-sm mx-auto "
         >
-          {loading ? "Logging In..." : "Login"}
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={handleChange}
+            className="border p-2 rounded"
+          />
+
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={handleChange}
+            className="border p-2 rounded"
+          />
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="bg-zinc-300 text-zinc-900 p-2 rounded border-zinc-400 border"
+          >
+            {loading ? "Logging In..." : "Login"}
+          </button>
+        </form>
+        <button
+          className="underline-link text-zinc-900"
+          onClick={() => navigate("/")}
+        >
+          Sign Up
         </button>
-      </form>
-      <button
-        className="underline-link text-zinc-900"
-        onClick={() => navigate("/")}
-      >
-        Sign Up
-      </button>
+      </div>
     </div>
   );
 }
