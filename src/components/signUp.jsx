@@ -45,7 +45,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex mx-auto flex-col w-[70%] border border-gray-300 rounded-2xl px-10 py-10">
+    <div className="flex mx-auto flex-col  border border-gray-300 rounded-2xl px-6 py-13">
       <form
         onSubmit={handleSignup}
         className="flex flex-col gap-4 max-w-sm mx-auto "
@@ -80,12 +80,15 @@ export default function Signup() {
         <button
           type="submit"
           disabled={loading}
-          className="bg-black text-white p-2 rounded"
+          className="bg-zinc-300 text-zinc-900 p-2 rounded border-zinc-400 border"
         >
           {loading ? "Signing Up..." : "Sign Up"}
         </button>
       </form>
-      <button className="underline-link" onClick={() => navigate("/login")}>
+      <button
+        className="underline-link text-zinc-900"
+        onClick={() => navigate("/login")}
+      >
         Already Have a Account Login Here
       </button>
     </div>

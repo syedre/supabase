@@ -3,10 +3,27 @@ import React from "react";
 const AuthLayout = ({ children }) => {
   return (
     <div className="h-screen w-full grid grid-cols-2">
-      <div className="bg-zinc-300  border-zinc-300 flex relative items-center flex-row-reverse">
-        <div className="w-30 h-30 bg-white translate-x-1/2 rotate-45 z-10"></div>
+      <div className="grid grid-cols-4 grid-rows-4 gap-px bg-zinc-200 border-r border-zinc-200 relative">
+        <div className="bg-transparent "></div>
+        <div className="bg-white"></div>
+        <div className="bg-white"> </div>
+        <div className="bg-white "></div>
+        <div className="bg-white"></div>
+        <div className="bg-white "></div>
+        <div className="bg-white "></div>
+        <div className="bg-white"></div>
+        <div className="bg-white"></div>
+        <div className="bg-white "></div>
+        <div className="bg-white "> </div>
+        <div className="bg-white"></div>
+        <div className="bg-white "></div>
+        <div className="bg-white"></div>
+        <div className="bg-white"> </div>
+        <div className="bg-transparent"></div>
+        <div className="flex items-center absolute  bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          {children}
+        </div>
       </div>
-      <div className="flex items-center">{children}</div>
     </div>
   );
 };

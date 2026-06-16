@@ -41,7 +41,7 @@ export default function Login({}) {
   };
 
   return (
-    <div className="flex mx-auto flex-col w-[70%] border border-gray-300 rounded-2xl px-10 py-10">
+    <div className="flex mx-auto flex-col border border-gray-300 rounded-2xl px-10 py-20">
       <form
         onSubmit={handleLogin}
         className="flex flex-col gap-4 max-w-sm mx-auto "
@@ -67,12 +67,15 @@ export default function Login({}) {
         <button
           type="submit"
           disabled={loading}
-          className="bg-black text-white p-2 rounded"
+          className="bg-zinc-300 text-zinc-900 p-2 rounded border-zinc-400 border"
         >
           {loading ? "Logging In..." : "Login"}
         </button>
       </form>
-      <button className="underline-link" onClick={() => navigate("/")}>
+      <button
+        className="underline-link text-zinc-900"
+        onClick={() => navigate("/")}
+      >
         Sign Up
       </button>
     </div>
