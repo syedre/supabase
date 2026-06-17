@@ -5,6 +5,7 @@
   --color-primary-text: black;
   --color-bermuda: green;
   --color-midnight: #e2e8f0;
+  --color-primary-wooden: #ac611c;
 }
 
 .dark {
@@ -12,6 +13,7 @@
   --color-primary-text: white;
   --color-bermuda: #1e293b;
   --color-midnight: #cbd5e1;
+  --color-primary-wooden: #ac611c;
 }
 
 @layer base {
@@ -56,5 +58,13 @@
     to {
       background-position: 20px 20px;
     }
+  }
+  .product-card {
+    background-color: whitesmoke;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    /* display: grid;
+    grid-template-rows: repeat(3, minmax(0, 1fr)); */
   }
 }
