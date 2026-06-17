@@ -10,13 +10,14 @@ import { IoIosMail } from "react-icons/io";
 
 const Footer = () => {
   return (
-    <footer className="relative overflow-hidden py-10">
-      <div className="relative max-w-7xl mx-auto px-6">
+    <footer className="relative overflow-hidden ">
+      <div className="relative max-w-7xl mx-auto ">
         <div
           className="
             overflow-hidden
-            rounded-3xl
+          
             border border-white/10
+          
             bg-linear-to-r from-[#0d2e35] to-[#021016] shadow-[0_8px_40px_rgba(0,0,0,0.35)]"
         >
           <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-12 p-10 relative ">
