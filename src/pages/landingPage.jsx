@@ -3,6 +3,7 @@ import royal_Logo from "../assets/royal.png";
 import banner from "../assets/banner.jpg";
 import ContentLanding from "../components/contentBox";
 import ProductDisplay from "../components/product";
+import Footer from "../components/footer";
 
 const LandingPage = () => {
   return (
@@ -47,7 +48,7 @@ const LandingPage = () => {
       </div>
       <ContentLanding />
       <ProductDisplay />
-      <footer>footer</footer>
+      <Footer />
     </div>
   );
 };

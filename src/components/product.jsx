@@ -15,7 +15,7 @@ const ProductDisplay = () => {
     <>
       <div className="p-10 h-full">
         <h2 className=" text-2xl pb-2">Products</h2>
-        <div className="border border-primary-wooden w-full h-full rounded-2xl flex flex-col items-center gap-2 pb-4">
+        <div className="border border-light-wood w-full h-full rounded-2xl flex flex-col items-center gap-2 pb-4">
           <div className="grid grid-cols-4 gap-2 w-full h-auto p-2 ">
             {[1, 2, 3, 4]?.map((i) => {
               const url = `prod_${i}`;
