@@ -5,6 +5,7 @@ import prod_1 from "../assets/prod_1.jpeg";
 import prod_2 from "../assets/prod_2.jpeg";
 import prod_3 from "../assets/prod_3.jpeg";
 import prod_4 from "../assets/prod_4.jpeg";
+import ContentLanding from "../components/contentBox";
 
 const obj = {
   1: prod_1,
@@ -30,17 +31,31 @@ const LandingPage = () => {
           </ul>
         </nav>
       </div>
-      <div className="relative group">
+      <div className="relative shadow-[0_20px_40px_-10px_rgba(0,0,0,0.50)]">
         <img
           src={banner}
           className="w-full  aspect-5/2 object-cover"
           alt="banner"
         />
-        <div className="text-stone-200 text-shadow-primary-wooden absolute bottom-1/4 left-1/2 -translate-x-1/2 translate-y-1/2  font-extrabold z-100 flex flex-col transition-all duration-500 ease-in-out group-hover:scale-110">
-          <h1 className="text-6xl tracking-widest ">ROYAL WOOD</h1>
-          <h4 className="text-3xl tracking-widest"> Handcrafted in 🇮🇳</h4>
+
+        <div className="absolute inset-0 bg-linear-to-b from-black/30 via-black/10 to-black/40 backdrop-blur-[1px]"></div>
+
+        <div className=" text-stone-200 text-shadow-primary-wooden absolute bottom-1/4 left-14 translate-y-1/2  font-extrabold z-100 flex flex-col  duration-500 ease-in-out group-hover:scale-110">
+          <h1 className="text-4xl tracking-widest ">
+            ROYAL <span className="text-[#E4B67A]">WOOD</span> INDUSTRY
+          </h1>
+          <div className="flex items-center gap-2">
+            <div className="bg-[#E4B67A] h-px w-15"></div>
+            <p className="">Made In 🇮🇳</p>
+            <div className="bg-[#E4B67A] h-px w-15"></div>
+          </div>
+
+          <h4 className="text-sm tracking-widest">
+            Premium Indian Wooden Handicrafts
+          </h4>
         </div>
       </div>
+      <ContentLanding />
       <div className="p-10 h-full">
         <h2 className=" font-bold text-2xl pb-2">Products</h2>
         <div className="border border-primary-wooden w-full h-full rounded-2xl flex flex-col items-center gap-2 pb-4">

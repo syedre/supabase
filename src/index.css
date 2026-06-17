@@ -6,6 +6,7 @@
   --color-bermuda: green;
   --color-midnight: #e2e8f0;
   --color-primary-wooden: #ac611c;
+  --color-light-wood: #e4b67a;
 }
 
 .dark {
@@ -14,6 +15,7 @@
   --color-bermuda: #1e293b;
   --color-midnight: #cbd5e1;
   --color-primary-wooden: #ac611c;
+  --color-light-wood: #e4b67a;
 }
 
 @layer base {
