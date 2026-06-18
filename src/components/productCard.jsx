@@ -12,12 +12,12 @@ const ProductCard = ({ i }) => {
     4: prod_4,
   };
   return (
-    <div className="group overflow-hidden rounded-3xl bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+    <div className="group overflow-hidden rounded-3xl bg-white shadow-md transition-all duration-300 hover:shadow-2xl">
       <div className="overflow-hidden">
         <img
           src={obj[i]}
           alt={`prod_${i}`}
-          className="h-72 w-full  object-cover transition-transform duration-500 group-hover:scale-105 "
+          className="h-72 w-full  object-cover transition-transform duration-500 "
         />
       </div>
       <div className="p-5">

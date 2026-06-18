@@ -26,7 +26,7 @@ const ProductCategory = () => {
                   return (
                     <button
                       key={index}
-                      className={`${active === i ? "backdrop-blur-xl bg-black/30" : ""} px-2 py-1 
+                      className={`${active === i ? "backdrop-blur-xl bg-stone-400/30" : ""} px-2 py-1 
                       rounded-lg 
                      text-left   transition-all duration-300 ease-in-out `}
                       onClick={() => setActive(i)}

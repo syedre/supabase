@@ -45,6 +45,7 @@ export const LandingHeader = ({ isLogo }) => {
   const navigate = useNavigate();
   const data = useLocation();
   const isLanding = data?.pathname === "/landing";
+  const isProducts = data?.pathname === "/products";
   return (
     <div
       className="  "
@@ -63,12 +64,15 @@ export const LandingHeader = ({ isLogo }) => {
       >
         <ul className="flex gap-6 cursor-pointer py-2 px-6 w-full justify-between">
           <li
-            className=" hover:underline transition-all duration-150 "
+            className={`${isLanding === true ? "text-light-wood" : ""}`}
             onClick={() => navigate("/landing")}
           >
             Home
           </li>
-          <li className="hover:underline" onClick={() => navigate("/products")}>
+          <li
+            className={`${isProducts === true ? "text-light-wood" : ""}`}
+            onClick={() => navigate("/products")}
+          >
             Products
           </li>
           <li className="hover:underline">Contact Us</li>
