@@ -54,9 +54,9 @@ export const LandingHeader = () => {
         <img src={royal_Logo} className="w-14 h-20 ml-10" alt="logo" />
       </div>
       <nav
-        className={`${isLanding === true ? "bg-black/50 backdrop-blur-2xl rounded-xl" : ""} text-amber-50 pr-10 hidden md:block `}
+        className={`${isLanding === true ? "bg-black/50 backdrop-blur-2xl rounded-xl" : ""} text-amber-50  hidden md:block `}
       >
-        <ul className="flex gap-6 cursor-pointer px-4 py-2">
+        <ul className="flex gap-6 cursor-pointer py-2 px-6 w-full justify-between">
           <li
             className=" hover:underline transition-all duration-150 "
             onClick={() => navigate("/landing")}
