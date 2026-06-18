@@ -17,6 +17,7 @@ import ProtectedRoute from "./components/protectedRoute";
 import AuthLayout from "./components/authLayout";
 import LandingPage from "./pages/landingPage";
 import ProductCategory from "./pages/productCategoryPage";
+import DashboardPage from "./pages/dashboardPage";
 
 export const UserContext = createContext();
 function App() {
@@ -58,6 +59,7 @@ function App() {
         />
         <Route path="/landing" element={<LandingPage />} />
         <Route path="/products" element={<ProductCategory />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
       </Routes>
     </BrowserRouter>
   );
