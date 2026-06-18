@@ -13,22 +13,14 @@ const Footer = () => {
     <footer className="relative overflow-hidden ">
       <div className="relative max-w-7xl mx-auto ">
         <div
-          className="
-            overflow-hidden
-          
-            border border-white/10
-          
-            bg-linear-to-r from-[#0d2e35] to-[#021016] shadow-[0_8px_40px_rgba(0,0,0,0.35)]"
+          className="overflow-hidden border border-white/10 
+        bg-linear-to-r from-[#0d2e35] to-[#021016] shadow-[0_8px_40px_rgba(0,0,0,0.35)]"
         >
-          <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-12 p-10 relative ">
-            {/* Brand */}
+          <div className="pl-10">
+            <img src={royal_Logo} alt="Royal Wood Industry" className="w-16 " />
+          </div>
+          <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-12 px-10 pb-8 relative ">
             <div>
-              <img
-                src={royal_Logo}
-                alt="Royal Wood Industry"
-                className="w-16 mb-4"
-              />
-
               <h3 className="text-xl font-semibold text-[#E4B67A]">
                 Royal Wood Industry
               </h3>
