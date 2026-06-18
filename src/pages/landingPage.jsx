@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import royal_Logo from "../assets/royal.png";
 import banner from "../assets/banner.jpg";
 import ContentLanding from "../components/contentBox";
@@ -41,7 +41,7 @@ const Banner = () => {
   );
 };
 
-export const LandingHeader = () => {
+export const LandingHeader = ({ isLogo }) => {
   const navigate = useNavigate();
   const data = useLocation();
   const isLanding = data?.pathname === "/landing";
@@ -50,9 +50,14 @@ export const LandingHeader = () => {
       className="  "
       className={`${isLanding === true ? "" : " bg-black/50 backdrop-blur-2xl "} z-100 h-20.25 top-0 left-0 fixed w-full flex justify-between items-center `}
     >
-      <div className=" rounded-full  ">
-        <img src={royal_Logo} className="w-14 h-20 ml-10" alt="logo" />
-      </div>
+      {isLogo === true ? (
+        <div className=" rounded-full  ">
+          <img src={royal_Logo} className="w-14 h-20 ml-10" alt="logo" />
+        </div>
+      ) : (
+        <div className="w-24"></div>
+      )}
+
       <nav
         className={`${isLanding === true ? "bg-black/50 backdrop-blur-2xl rounded-xl" : ""} text-amber-50  hidden md:block `}
       >
@@ -75,10 +80,32 @@ export const LandingHeader = () => {
 };
 
 const LandingPage = () => {
+  const [showLogo, setShowLogo] = useState(true);
+  const targetRef = useRef();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowLogo(entry.isIntersecting);
+      },
+      {
+        threshold: 1,
+      },
+    );
+
+    if (targetRef.current) {
+      observer.observe(targetRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="hide-scrollbar overflow-y-auto">
-      <LandingHeader />
+      <LandingHeader isLogo={showLogo} />
+
       <Banner />
+      <div ref={targetRef}></div>
       <ContentLanding />
       <ProductDisplay />
       <Footer />
