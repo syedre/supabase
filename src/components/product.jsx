@@ -10,7 +10,7 @@ const ProductDisplay = () => {
           <div className="grid md:grid-cols-4 sm:grid-cols-1 gap-8 w-full h-auto md:p-10 lg:p-10">
             {[1, 2, 3, 4]?.map((i, index) => {
               const url = `prod_${i}`;
-              return <ProductCard i={i} key={index} />;
+              return <ProductCard i={i} key={index} inx={i} />;
             })}
           </div>
           <div>

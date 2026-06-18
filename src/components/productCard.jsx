@@ -3,26 +3,29 @@ import prod_1 from "../assets/prod_1.jpeg";
 import prod_2 from "../assets/prod_2.jpeg";
 import prod_3 from "../assets/prod_3.jpeg";
 import prod_4 from "../assets/prod_4.jpeg";
+import { supabaseUrl } from "../utils/supabase";
 
-const ProductCard = ({ i }) => {
+const ProductCard = ({ i, inx }) => {
   const obj = {
     1: prod_1,
     2: prod_2,
     3: prod_3,
     4: prod_4,
   };
+
+  const base_url = `${supabaseUrl}/storage/v1/object/public/royalwood/${i?.image_url}`;
   return (
     <div className="group overflow-hidden rounded-3xl bg-white shadow-md transition-all duration-300 hover:shadow-2xl">
       <div className="overflow-hidden">
         <img
-          src={obj[i]}
+          src={!!i.image_url ? base_url : obj[inx]}
           alt={`prod_${i}`}
           className="h-72 w-full  object-cover transition-transform duration-500 "
         />
       </div>
       <div className="p-5">
         <h3 className="text-sm font-semibold text-zinc-900">
-          Premium Teak Plywood
+          {i?.name || "Premium Teak Plywood"}
         </h3>
 
         <p className="mt-2 text-xs leading-4 text-zinc-600">
