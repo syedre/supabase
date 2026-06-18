@@ -4,6 +4,12 @@ import banner from "../assets/banner.jpg";
 import ContentLanding from "../components/contentBox";
 import ProductDisplay from "../components/product";
 import Footer from "../components/footer";
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 
 const Banner = () => {
   return (
@@ -35,21 +41,35 @@ const Banner = () => {
   );
 };
 
-const LandingHeader = () => {
+export const LandingHeader = () => {
+  const navigate = useNavigate();
+  const data = useLocation();
+  const isLanding = data?.pathname === "/landing";
   return (
-    <div className="z-10 h-20.25 top-0 left-0 fixed w-full flex justify-between items-center   ">
-      <div className=" rounded-full ">
+    <div
+      className="  "
+      className={`${isLanding === true ? "" : " bg-black/50 backdrop-blur-2xl "} z-100 h-20.25 top-0 left-0 fixed w-full flex justify-between items-center `}
+    >
+      <div className=" rounded-full  ">
         <img src={royal_Logo} className="w-14 h-20 ml-10" alt="logo" />
       </div>
-      <nav className="text-amber-50 pr-10 hidden md:block">
-        <ul className="flex gap-6 cursor-pointer">
-          <li className=" hover:underline transition-all duration-150 ">
+      <nav
+        className={`${isLanding === true ? "bg-black/50 backdrop-blur-2xl rounded-xl" : ""} text-amber-50 pr-10 hidden md:block `}
+      >
+        <ul className="flex gap-6 cursor-pointer px-4 py-2">
+          <li
+            className=" hover:underline transition-all duration-150 "
+            onClick={() => navigate("/landing")}
+          >
             Home
           </li>
-          <li className="hover:underline">Products</li>
+          <li className="hover:underline" onClick={() => navigate("/products")}>
+            Products
+          </li>
           <li className="hover:underline">Contact Us</li>
         </ul>
       </nav>
+      <div className="w-24"></div>
     </div>
   );
 };
