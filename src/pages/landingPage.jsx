@@ -12,7 +12,7 @@ const LandingPage = () => {
         <div className=" rounded-full ">
           <img src={royal_Logo} className="w-14 h-20 ml-10" alt="logo" />
         </div>
-        <nav className="text-amber-50 pr-10 ">
+        <nav className="text-amber-50 pr-10 hidden md:block">
           <ul className="flex gap-6 cursor-pointer">
             <li className=" hover:underline transition-all duration-150 ">
               Home

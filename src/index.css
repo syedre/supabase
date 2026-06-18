@@ -13,6 +13,7 @@ body {
   --color-midnight: #e2e8f0;
   --color-primary-wooden: #ac611c;
   --color-light-wood: #e4b67a;
+  --breakpoint-xs: 30rem;
 }
 
 .dark {
