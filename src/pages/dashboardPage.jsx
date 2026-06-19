@@ -149,6 +149,7 @@ const DashboardPage = () => {
           ref={inputRef}
           type="file"
           className="hidden"
+          accept=".jpg,.jpeg,.png,image/jpeg,image/png"
           onChange={handleFileChange}
         />
 
