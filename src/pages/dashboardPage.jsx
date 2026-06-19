@@ -55,9 +55,9 @@ const DashboardPage = () => {
       const { error } = await supabase.from("products").insert({
         name: formData.name,
         description: formData.description,
-        category: formData.category,
         image_url: imageData.path,
         is_active: true,
+        category_id: formData.category,
       });
 
       if (error) throw error;
