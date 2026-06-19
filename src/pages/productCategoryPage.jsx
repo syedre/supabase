@@ -35,7 +35,8 @@ const ProductCategory = () => {
           .from("products")
           .select("*")
           .in("category_id", active === "10" ? allIds : [active])
-          .order("created_at", { ascending: false });
+          .order("created_at", { ascending: false })
+          .eq("is_active", true);
 
         if (error) throw error;
 
