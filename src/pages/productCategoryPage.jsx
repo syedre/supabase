@@ -49,7 +49,8 @@ const ProductCategory = () => {
         .in(
           "category_id",
           active === "10" && get_all_ids.length > 0 ? get_all_ids : [active],
-        );
+        )
+        .order("created_at", { ascending: false });
       return data;
     };
     getActiveData().then((res) => setProducts(res));
