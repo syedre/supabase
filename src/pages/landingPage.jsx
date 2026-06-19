@@ -10,6 +10,7 @@ import {
   useParams,
   useSearchParams,
 } from "react-router-dom";
+import { NewHeader } from "../components/newHeader";
 
 const Banner = () => {
   return (
@@ -106,7 +107,7 @@ const LandingPage = () => {
 
   return (
     <div className="hide-scrollbar overflow-y-auto">
-      <LandingHeader isLogo={showLogo} />
+      <NewHeader isLogo={showLogo} />
 
       <Banner />
       <div ref={targetRef}></div>

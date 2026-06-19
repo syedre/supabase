@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { LandingHeader } from "./landingPage";
 import ProductCard from "../components/productCard";
 import { supabase } from "../utils/supabase";
+import { NewHeader } from "../components/newHeader";
 
 const ProductCategory = () => {
   const [active, setActive] = useState("10");
@@ -56,10 +57,10 @@ const ProductCategory = () => {
 
   return (
     <div className="overflow-hidden">
-      <LandingHeader />
+      <NewHeader />
 
       <div className="grid grid-cols-6 mt-20.25 h-[calc(100vh-81px)] ">
-        <div className="border-r col-span-2 border-stone-300 flex flex-col ">
+        <div className="border-r col-span-2 md:col-span-1 border-stone-300 flex flex-col ">
           <div className="px-4">
             <input
               placeholder=" Search By Name......"
@@ -78,7 +79,7 @@ const ProductCategory = () => {
                         key={index}
                         className={`${active === i?.id ? "backdrop-blur-xl bg-stone-400/30" : ""} 
                       rounded-lg 
-                     text-left   transition-all duration-300 ease-in-out `}
+                     text-left   transition-all duration-300 ease-in-out px-2 `}
                         onClick={() => setActive(i?.id)}
                       >
                         {i?.name}
@@ -89,8 +90,8 @@ const ProductCategory = () => {
             </div>
           </div>
         </div>
-        <div className="col-span-4 grid  h-full overflow-y-auto">
-          <div className=" grid grid-cols-1 md:grid-cols-4 p-4 gap-4 ">
+        <div className="col-span-4 md:col-span-5  grid  h-full overflow-y-auto">
+          <div className=" grid grid-cols-1 md:grid-cols-5 p-4 gap-4 ">
             {products &&
               products?.map((i, index) => {
                 return <ProductCard i={i} key={index} inx={index + 1} />;
