@@ -59,7 +59,7 @@ const ProductCategory = () => {
       <LandingHeader />
 
       <div className="grid grid-cols-6 mt-20.25 h-[calc(100vh-81px)] ">
-        <div className="border-r border-stone-300 flex flex-col ">
+        <div className="border-r col-span-2 border-stone-300 flex flex-col ">
           <div className="px-4">
             <input
               placeholder=" Search By Name......"
@@ -76,7 +76,7 @@ const ProductCategory = () => {
                     return (
                       <button
                         key={index}
-                        className={`${active === i?.id ? "backdrop-blur-xl bg-stone-400/30" : ""} px-2 py-1 
+                        className={`${active === i?.id ? "backdrop-blur-xl bg-stone-400/30" : ""} 
                       rounded-lg 
                      text-left   transition-all duration-300 ease-in-out `}
                         onClick={() => setActive(i?.id)}
@@ -89,8 +89,8 @@ const ProductCategory = () => {
             </div>
           </div>
         </div>
-        <div className="col-span-5 grid  h-full overflow-y-auto">
-          <div className=" grid grid-cols-2 md:grid-cols-4 p-4 gap-4 ">
+        <div className="col-span-4 grid  h-full overflow-y-auto">
+          <div className=" grid grid-cols-1 md:grid-cols-4 p-4 gap-4 ">
             {products &&
               products?.map((i, index) => {
                 return <ProductCard i={i} key={index} inx={index + 1} />;
