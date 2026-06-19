@@ -15,12 +15,12 @@ const ProductCard = ({ i, inx }) => {
 
   const base_url = `${supabaseUrl}/storage/v1/object/public/royalwood/${i?.image_url}`;
   return (
-    <div className="group overflow-hidden rounded-3xl bg-white shadow-md transition-all duration-300 hover:shadow-2xl">
+    <div className="group overflow-hidden rounded-3xl bg-white shadow-md transition-all duration-300 hover:shadow-2xl   ">
       <div className="overflow-hidden">
         <img
           src={!!i.image_url ? base_url : obj[inx]}
           alt={`prod_${i}`}
-          className="h-72 w-full  object-cover transition-transform duration-500 "
+          className="h-72 w-full max-h-[250px] object-fill transition-transform duration-500 "
         />
       </div>
       <div className="p-5">

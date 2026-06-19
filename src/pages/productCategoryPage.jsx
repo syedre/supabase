@@ -3,12 +3,11 @@ import { LandingHeader } from "./landingPage";
 import ProductCard from "../components/productCard";
 import { supabase } from "../utils/supabase";
 
-const catergory = ["All", "Home Decor", "Gift Sets", "Wall Art"];
-
 const ProductCategory = () => {
-  const [active, setActive] = useState("All");
+  const [active, setActive] = useState("10");
   const [products, setProducts] = useState([]);
   const [image, setImage] = useState(null);
+  const [productCategory, setProductCategory] = useState([]);
 
   const handleImage = async (event) => {
     console.log(event);
@@ -24,20 +23,42 @@ const ProductCategory = () => {
   };
 
   useEffect(() => {
-    const getData = async () => {
-      const { data } = await supabase.from("products").select("*");
+    const getProductCategory = async () => {
+      const { data } = await supabase.from("product_category").select("*");
       return data;
     };
-    getData().then((res) => {
-      setProducts(res);
+    getProductCategory().then((res) => {
+      setProductCategory([{ name: "All", id: "10" }, ...res]);
     });
   }, []);
+
+  useEffect(() => {
+    if (productCategory.length === 0) return;
+    const get_all_ids = [];
+    for (let item of productCategory) {
+      if (item?.id !== "10") {
+        get_all_ids.push(item.id);
+      }
+    }
+
+    const getActiveData = async () => {
+      const { data } = await supabase
+        .from("products")
+        .select("*")
+        .in(
+          "category_id",
+          active === "10" && get_all_ids.length > 0 ? get_all_ids : [active],
+        );
+      return data;
+    };
+    getActiveData().then((res) => setProducts(res));
+  }, [active, JSON.stringify(productCategory)]);
 
   return (
     <div className="overflow-hidden">
       <LandingHeader />
 
-      <div className="grid grid-cols-4 mt-20.25 h-[calc(100vh-81px)] ">
+      <div className="grid grid-cols-6 mt-20.25 h-[calc(100vh-81px)] ">
         <div className="border-r border-stone-300 flex flex-col ">
           <div className="px-4">
             <input
@@ -50,25 +71,26 @@ const ProductCategory = () => {
             <div className="px-4">
               <h3 className="py-3">Filter By Category</h3>
               <div className="flex flex-wrap flex-col gap-3   ">
-                {catergory?.map((i, index) => {
-                  return (
-                    <button
-                      key={index}
-                      className={`${active === i ? "backdrop-blur-xl bg-stone-400/30" : ""} px-2 py-1 
+                {!!productCategory &&
+                  productCategory?.map((i, index) => {
+                    return (
+                      <button
+                        key={index}
+                        className={`${active === i?.id ? "backdrop-blur-xl bg-stone-400/30" : ""} px-2 py-1 
                       rounded-lg 
                      text-left   transition-all duration-300 ease-in-out `}
-                      onClick={() => setActive(i)}
-                    >
-                      {i}
-                    </button>
-                  );
-                })}
+                        onClick={() => setActive(i?.id)}
+                      >
+                        {i?.name}
+                      </button>
+                    );
+                  })}
               </div>
             </div>
           </div>
         </div>
-        <div className="col-span-3 grid  h-full overflow-y-auto">
-          <div className=" grid grid-cols-3 p-4 gap-2 ">
+        <div className="col-span-5 grid  h-full overflow-y-auto">
+          <div className=" grid grid-cols-2 md:grid-cols-4 p-4 gap-4 ">
             {products &&
               products?.map((i, index) => {
                 return <ProductCard i={i} key={index} inx={index + 1} />;
