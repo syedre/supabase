@@ -1,7 +1,10 @@
 import React from "react";
 import ProductCard from "./productCard";
+import { useNavigate } from "react-router-dom";
 
 const ProductDisplay = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="p-10 h-full">
@@ -14,7 +17,10 @@ const ProductDisplay = () => {
             })}
           </div>
           <div>
-            <button className="button-pulse w-50 border border-stone-400 text-stone-500 p-2 rounded-sm transition-all">
+            <button
+              onClick={() => navigate("/products")}
+              className="button-pulse w-50 border border-stone-400 text-stone-500 p-2 rounded-sm transition-all"
+            >
               View Products
             </button>
           </div>
