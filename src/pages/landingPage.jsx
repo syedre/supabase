@@ -4,12 +4,7 @@ import banner from "../assets/banner.jpg";
 import ContentLanding from "../components/contentBox";
 import ProductDisplay from "../components/product";
 import Footer from "../components/footer";
-import {
-  useLocation,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { NewHeader } from "../components/newHeader";
 
 const Banner = () => {
@@ -49,7 +44,6 @@ export const LandingHeader = ({ isLogo }) => {
   const isProducts = data?.pathname === "/products";
   return (
     <div
-      className="  "
       className={`${isLanding === true ? "" : " bg-black/50 backdrop-blur-2xl "} z-100 h-20.25 top-0 left-0 fixed w-full flex justify-between items-center `}
     >
       {isLogo === true ? (
