@@ -15,25 +15,27 @@ const ProductCard = ({ i, inx }) => {
 
   const base_url = `${supabaseUrl}/storage/v1/object/public/royalwood/${i?.image_url}`;
   return (
-    <div className="group overflow-hidden rounded-3xl bg-white shadow-md transition-all duration-300 hover:shadow-2xl   ">
-      <div className="overflow-hidden">
+    <div className="group grid grid-rows-2 rounded-3xl bg-white shadow-md transition-all duration-300 hover:shadow-2xl ">
+      <div className="">
         <img
           src={!!i.image_url ? base_url : obj[inx]}
           alt={`prod_${i}`}
-          className="h-72 w-full max-h-[250px] object-fill transition-transform duration-500 "
+          className="h-62 w-full  object-fill transition-transform duration-500 "
         />
       </div>
-      <div className="p-5">
-        <h3 className="text-sm font-semibold text-zinc-900">
-          {i?.name || "Premium Teak Plywood"}
-        </h3>
-
-        <p className="mt-2 text-xs leading-4 text-zinc-600">
-          High-quality plywood with exceptional durability and elegant finish,
-          suitable for residential and commercial interiors.
-        </p>
-
-        <div className="mt-5 flex items-center ">
+      <div className="p-5 flex h-full justify-between flex-col">
+        <div className="flex-[20%]">
+          <h3 className="text-sm font-semibold text-zinc-900">
+            {i?.name || "Premium Teak Plywood"}
+          </h3>
+        </div>
+        <div className="flex-[50%]">
+          <p className=" text-xs leading-4 text-zinc-600">
+            High-quality plywood with exceptional durability and elegant finish,
+            suitable for residential and commercial interiors.
+          </p>
+        </div>
+        <div className=" flex items-center flex-[20%]">
           <button className="rounded-xl w-full border border-stone-300 px-4 py-2 text-xs font-medium text-stone-500 transition hover:bg-zinc-700 hover:text-white">
             View Details
           </button>
