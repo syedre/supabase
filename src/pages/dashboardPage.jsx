@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { supabase } from "../utils/supabase";
 
 const category = ["Gift", "Decor", "Ambari"];
@@ -9,9 +9,10 @@ const DashboardPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
-    category: category[0],
+    category: "",
   });
 
+  const [productCategory, setProductCategory] = useState([]);
   const [file, setFile] = useState(null);
 
   const handleClick = () => {
@@ -62,12 +63,42 @@ const DashboardPage = () => {
       if (error) throw error;
 
       alert("Submitted Successfully");
+      setFormData({
+        name: "",
+        description: "",
+        category: "",
+      });
+      setFile(null);
     } catch (err) {
       console.error(err);
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("product_category")
+          .select("*");
+
+        if (error) throw error;
+        if (data) return data;
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getData().then((res) => {
+      setProductCategory(res);
+      setFormData({
+        name: "",
+        description: "",
+        category: res?.[0]?.id,
+      });
+    });
+  }, []);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
@@ -106,9 +137,9 @@ const DashboardPage = () => {
             onChange={handleChange}
             className="w-full border rounded-lg p-2"
           >
-            {category.map((item) => (
-              <option key={item} value={item}>
-                {item}
+            {productCategory.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.name}
               </option>
             ))}
           </select>
