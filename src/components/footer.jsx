@@ -1,5 +1,4 @@
 import React from "react";
-import royal_Logo from "../assets/royal.png";
 import {
   FaInstagram,
   FaFacebook,
@@ -7,6 +6,7 @@ import {
   FaMapMarkerAlt,
 } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
+import { logo_url } from "@/assets/picture";
 
 const Footer = () => {
   return (
@@ -17,7 +17,7 @@ const Footer = () => {
         bg-linear-to-r from-[#0d2e35] to-[#021016] shadow-[0_8px_40px_rgba(0,0,0,0.35)]"
         >
           <div className="pl-10">
-            <img src={royal_Logo} alt="Royal Wood Industry" className="w-16 " />
+            <img src={logo_url} alt="Royal Wood Industry" className="w-16 " />
           </div>
           <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-12 px-10 pb-8 relative ">
             <div>

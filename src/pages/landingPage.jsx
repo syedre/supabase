@@ -1,17 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-import royal_Logo from "../assets/royal.png";
-import banner from "../assets/banner.jpg";
 import ContentLanding from "../components/contentBox";
 import ProductDisplay from "../components/product";
 import Footer from "../components/footer";
-import { useLocation, useNavigate } from "react-router-dom";
 import { NewHeader } from "../components/newHeader";
+import { banner_url } from "@/assets/picture";
 
 const Banner = () => {
   return (
     <div className="relative shadow-[0_20px_40px_-10px_rgba(0,0,0,0.50)]">
       <img
-        src={banner}
+        src={banner_url}
         className="w-full aspect-4/3 sm:aspect-video lg:aspect-5/2 object-cover"
         alt="banner"
       />
@@ -33,47 +31,6 @@ const Banner = () => {
           Premium Indian Wooden Handicrafts
         </h4>
       </div>
-    </div>
-  );
-};
-
-export const LandingHeader = ({ isLogo }) => {
-  const navigate = useNavigate();
-  const data = useLocation();
-  const isLanding = data?.pathname === "/landing";
-  const isProducts = data?.pathname === "/products";
-  return (
-    <div
-      className={`${isLanding === true ? "" : " bg-black/50 backdrop-blur-2xl "} z-100 h-20.25 top-0 left-0 fixed w-full flex justify-between items-center `}
-    >
-      {isLogo === true ? (
-        <div className=" rounded-full  ">
-          <img src={royal_Logo} className="w-14 h-20 ml-10" alt="logo" />
-        </div>
-      ) : (
-        <div className="w-24"></div>
-      )}
-
-      <nav
-        className={`${isLanding === true ? "bg-black/50 backdrop-blur-2xl rounded-xl" : ""} text-amber-50  hidden md:block `}
-      >
-        <ul className="flex gap-6 cursor-pointer py-2 px-6 w-full justify-between">
-          <li
-            className={`${isLanding === true ? "text-light-wood" : ""}`}
-            onClick={() => navigate("/landing")}
-          >
-            Home
-          </li>
-          <li
-            className={`${isProducts === true ? "text-light-wood" : ""}`}
-            onClick={() => navigate("/products")}
-          >
-            Products
-          </li>
-          <li className="hover:underline">Contact Us</li>
-        </ul>
-      </nav>
-      <div className="w-24"></div>
     </div>
   );
 };

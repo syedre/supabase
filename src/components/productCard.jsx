@@ -1,19 +1,15 @@
 import React, { useState } from "react";
-import prod_1 from "../assets/prod_1.jpeg";
-import prod_2 from "../assets/prod_2.jpeg";
-import prod_3 from "../assets/prod_3.jpeg";
-import prod_4 from "../assets/prod_4.jpeg";
 import { supabase, supabaseUrl } from "../utils/supabase";
 import { useLocation } from "react-router-dom";
 import { Label } from "./ui/label";
 import { Switch } from "@/components/ui/switch";
+import { picture_1, picture_2, picture_3, picture_4 } from "@/assets/picture";
 const ProductCard = ({ i, inx }) => {
-  const [enable, setEnable] = useState();
   const obj = {
-    1: prod_1,
-    2: prod_2,
-    3: prod_3,
-    4: prod_4,
+    1: picture_1,
+    2: picture_2,
+    3: picture_3,
+    4: picture_4,
   };
 
   const location = useLocation();
@@ -57,7 +53,6 @@ const ProductCard = ({ i, inx }) => {
           <div className="flex items-center space-x-2">
             <Switch
               defaultChecked={i?.is_active}
-              checked={enable}
               id="airplane-mode"
               onCheckedChange={(checked) => {
                 handleSwitch(i?.product_id, checked);
