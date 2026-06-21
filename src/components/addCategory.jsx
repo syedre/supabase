@@ -10,8 +10,9 @@ const AddProductCategory = () => {
   const [loading, setLoading] = useState(false);
 
   const handleAddCategory = async () => {
-    setLoading(true);
+    if (inputCategory.length === 0) return;
     try {
+      setLoading(true);
       const { data, error } = await supabase
         .from("product_category")
         .insert({
@@ -60,7 +61,9 @@ const AddProductCategory = () => {
           variant="outline"
           size="sm"
           onClick={handleAddCategory}
-          disabled={loading === true ? true : false}
+          disabled={
+            loading === true || inputCategory.length === 0 ? true : false
+          }
         >
           {loading === true ? <Spinner /> : "Add Category"}
         </Button>
