@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ProductCard from "../components/productCard";
 import { supabase } from "../utils/supabase";
 import { NewHeader } from "../components/newHeader";
@@ -6,9 +6,11 @@ import { Spinner } from "@/components/ui/spinner";
 
 const ProductCategory = () => {
   const [active, setActive] = useState("10");
-  const [products, setProducts] = useState(null);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [productCategory, setProductCategory] = useState([]);
+  const [limit, setLimit] = useState(2);
+  const intersectionRef = useRef();
 
   useEffect(() => {
     const getProductCategory = async () => {
@@ -19,6 +21,28 @@ const ProductCategory = () => {
       setProductCategory([{ name: "All", id: "10" }, ...res]);
     });
   }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entries]) => {
+        console.log(entries);
+        if (entries?.isIntersecting === true) {
+          setLimit((prevlimit) => prevlimit + 3);
+        }
+      },
+      {
+        threshold: 0.5,
+      },
+    );
+    observer.observe(intersectionRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    setProducts([]);
+    setLimit(2);
+  }, [active]);
 
   useEffect(() => {
     if (productCategory.length === 0) return;
@@ -36,11 +60,12 @@ const ProductCategory = () => {
           .select("*")
           .in("category_id", active === "10" ? allIds : [active])
           .order("created_at", { ascending: false })
-          .eq("is_active", true);
+          .eq("is_active", true)
+          .range(limit - 2, limit);
 
         if (error) throw error;
 
-        setProducts(data || []);
+        setProducts((prev) => [...prev, ...data] || []);
       } catch (error) {
         console.error(error);
         setProducts([]);
@@ -50,7 +75,7 @@ const ProductCategory = () => {
     };
 
     fetchProducts();
-  }, [active, productCategory]);
+  }, [productCategory, limit]);
 
   return (
     <div className="overflow-hidden">
@@ -89,18 +114,19 @@ const ProductCategory = () => {
         </div>
 
         <div className="col-span-4 md:col-span-5  grid  h-full overflow-y-auto ">
+          <div className=" grid grid-cols-1 md:grid-cols-5 p-4 gap-4 ">
+            {products?.map((i, index) => {
+              return <ProductCard i={i} key={index} inx={index + 1} />;
+            })}
+          </div>
+
           {loading === true && (
             <div className="flex items-center justify-center h-full">
               <Spinner className={"h-7 w-7"} />
             </div>
           )}
-          {!!products && loading === false && (
-            <div className=" grid grid-cols-1 md:grid-cols-5 p-4 gap-4 ">
-              {products?.map((i, index) => {
-                return <ProductCard i={i} key={index} inx={index + 1} />;
-              })}
-            </div>
-          )}
+
+          <div ref={intersectionRef}></div>
         </div>
       </div>
     </div>
