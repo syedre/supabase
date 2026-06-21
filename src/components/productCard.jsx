@@ -1,16 +1,30 @@
-import React from "react";
-import prod_1 from "../assets/prod_1.jpeg";
-import prod_2 from "../assets/prod_2.jpeg";
-import prod_3 from "../assets/prod_3.jpeg";
-import prod_4 from "../assets/prod_4.jpeg";
-import { supabaseUrl } from "../utils/supabase";
-
+import React, { useState } from "react";
+import { supabase, supabaseUrl } from "../utils/supabase";
+import { useLocation } from "react-router-dom";
+import { Label } from "./ui/label";
+import { Switch } from "@/components/ui/switch";
+import { picture_1, picture_2, picture_3, picture_4 } from "@/assets/picture";
 const ProductCard = ({ i, inx }) => {
   const obj = {
-    1: prod_1,
-    2: prod_2,
-    3: prod_3,
-    4: prod_4,
+    1: picture_1,
+    2: picture_2,
+    3: picture_3,
+    4: picture_4,
+  };
+
+  const location = useLocation();
+  const isDashboard = location.pathname === "/dashboard" ? true : false;
+
+  const handleSwitch = async (id, checked) => {
+    try {
+      const { error } = await supabase
+        .from("products")
+        .update({ is_active: checked })
+        .eq("product_id", id);
+      if (error) throw error;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const base_url = `${supabaseUrl}/storage/v1/object/public/royalwood/${i?.image_url}`;
@@ -35,6 +49,19 @@ const ProductCard = ({ i, inx }) => {
             suitable for residential and commercial interiors.
           </p>
         </div>
+        {isDashboard === true && (
+          <div className="flex items-center space-x-2">
+            <Switch
+              defaultChecked={i?.is_active}
+              id="airplane-mode"
+              onCheckedChange={(checked) => {
+                handleSwitch(i?.product_id, checked);
+              }}
+            />
+            <Label htmlFor="airplane-mode">Active</Label>
+          </div>
+        )}
+
         <div className=" flex items-center flex-[20%]">
           <button className="rounded-xl w-full border border-stone-300 px-4 py-2 text-xs font-medium text-stone-500 transition hover:bg-zinc-700 hover:text-white">
             View Details

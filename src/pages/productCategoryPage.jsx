@@ -1,27 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { LandingHeader } from "./landingPage";
 import ProductCard from "../components/productCard";
 import { supabase } from "../utils/supabase";
 import { NewHeader } from "../components/newHeader";
+import { Spinner } from "@/components/ui/spinner";
 
 const ProductCategory = () => {
   const [active, setActive] = useState("10");
-  const [products, setProducts] = useState([]);
-  const [image, setImage] = useState(null);
+  const [products, setProducts] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [productCategory, setProductCategory] = useState([]);
-
-  const handleImage = async (event) => {
-    console.log(event);
-    const file = event?.target?.files[0];
-    // const ext = file.name.split(".").pop();
-    const filePath = `products/images/${crypto.randomUUID()}`;
-    const { data, error } = await supabase.storage
-      .from("royalwood")
-      .upload(filePath, file);
-    if (!!data) {
-      console.log(data, "----");
-    }
-  };
 
   useEffect(() => {
     const getProductCategory = async () => {
@@ -35,26 +22,35 @@ const ProductCategory = () => {
 
   useEffect(() => {
     if (productCategory.length === 0) return;
-    const get_all_ids = [];
-    for (let item of productCategory) {
-      if (item?.id !== "10") {
-        get_all_ids.push(item.id);
-      }
-    }
 
-    const getActiveData = async () => {
-      const { data } = await supabase
-        .from("products")
-        .select("*")
-        .in(
-          "category_id",
-          active === "10" && get_all_ids.length > 0 ? get_all_ids : [active],
-        )
-        .order("created_at", { ascending: false });
-      return data;
+    const fetchProducts = async () => {
+      setLoading(true);
+
+      try {
+        const allIds = productCategory
+          .filter((item) => item.id !== "10")
+          .map((item) => item.id);
+
+        const { data, error } = await supabase
+          .from("products")
+          .select("*")
+          .in("category_id", active === "10" ? allIds : [active])
+          .order("created_at", { ascending: false })
+          .eq("is_active", true);
+
+        if (error) throw error;
+
+        setProducts(data || []);
+      } catch (error) {
+        console.error(error);
+        setProducts([]);
+      } finally {
+        setLoading(false);
+      }
     };
-    getActiveData().then((res) => setProducts(res));
-  }, [active, JSON.stringify(productCategory)]);
+
+    fetchProducts();
+  }, [active, productCategory]);
 
   return (
     <div className="overflow-hidden">
@@ -91,13 +87,20 @@ const ProductCategory = () => {
             </div>
           </div>
         </div>
-        <div className="col-span-4 md:col-span-5  grid  h-full overflow-y-auto">
-          <div className=" grid grid-cols-1 md:grid-cols-5 p-4 gap-4 ">
-            {products &&
-              products?.map((i, index) => {
+
+        <div className="col-span-4 md:col-span-5  grid  h-full overflow-y-auto ">
+          {loading === true && (
+            <div className="flex items-center justify-center h-full">
+              <Spinner className={"h-7 w-7"} />
+            </div>
+          )}
+          {!!products && loading === false && (
+            <div className=" grid grid-cols-1 md:grid-cols-5 p-4 gap-4 ">
+              {products?.map((i, index) => {
                 return <ProductCard i={i} key={index} inx={index + 1} />;
               })}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

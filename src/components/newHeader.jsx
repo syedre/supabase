@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
-import royal_Logo from "../assets/royal.png";
+import { logo_url } from "@/assets/picture";
 
 export const NewHeader = ({ isLogo }) => {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ export const NewHeader = ({ isLogo }) => {
         {isLogo ? (
           <div>
             <img
-              src={royal_Logo}
+              src={logo_url}
               className="w-14 h-20 ml-5 md:ml-10"
               alt="logo"
             />
@@ -100,7 +100,7 @@ export const NewHeader = ({ isLogo }) => {
       >
         {/* Drawer Header */}
         <div className="flex justify-between items-center px-5 py-5 border-b border-white/10">
-          <img src={royal_Logo} alt="logo" className="w-12" />
+          <img src={logo_url} alt="logo" className="w-12" />
 
           <button onClick={() => setOpen(false)} className="text-white text-xl">
             <FaTimes />
