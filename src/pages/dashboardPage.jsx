@@ -1,3 +1,4 @@
+import AddProductCategory from "@/components/addCategory";
 import AddProduct from "@/components/addProduct";
 import EditProducts from "@/components/editProducts";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -17,7 +18,9 @@ export default function DashboardPage() {
         <TabsContent value="edit">
           <EditProducts />
         </TabsContent>
-        <TabsContent value="category">Add category</TabsContent>
+        <TabsContent value="category">
+          <AddProductCategory />
+        </TabsContent>
       </Tabs>
     </div>
   );
