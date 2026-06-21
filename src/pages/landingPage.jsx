@@ -3,6 +3,7 @@ import ContentLanding from "../components/contentBox";
 import ProductDisplay from "../components/product";
 import Footer from "../components/footer";
 import { NewHeader } from "../components/newHeader";
+import Banner from "@/components/banner";
 
 const LandingPage = () => {
   const [showLogo, setShowLogo] = useState(true);

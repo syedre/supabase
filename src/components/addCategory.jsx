@@ -52,6 +52,8 @@ const AddProductCategory = () => {
       <input
         value={inputCategory}
         onChange={(event) => setInputCategory(event.target.value)}
+        placeholder="Add a category"
+        className="pl-2"
       />
       <div>
         <Button
