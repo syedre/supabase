@@ -35,7 +35,6 @@ const AddProduct = () => {
   };
 
   const handleSubmit = async (e) => {
-    setLoading(true);
     e.preventDefault();
     if (!file) {
       alert("Please select a file");
@@ -43,6 +42,7 @@ const AddProduct = () => {
     }
 
     try {
+      setLoading(true);
       const filePath = `products/images/${crypto.randomUUID()}`;
       const { data: imageData, error: imageError } = await supabase.storage
         .from("royalwood")
