@@ -96,8 +96,8 @@ const ProductCategory = () => {
           )}
           {!!products && loading === false && (
             <div className=" grid grid-cols-1 md:grid-cols-5 p-4 gap-4 ">
-              {products?.map((i, index) => {
-                return <ProductCard i={i} key={index} inx={index + 1} />;
+              {products?.map((item, index) => {
+                return <ProductCard item={item} key={index} />;
               })}
             </div>
           )}
