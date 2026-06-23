@@ -2,13 +2,24 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "../components/productCard";
 import { supabase } from "../utils/supabase";
 import { NewHeader } from "../components/newHeader";
-import { Spinner } from "@/components/ui/spinner";
+import { Button } from "@/components/ui/button";
+
+const _range_number = 5;
 
 const ProductCategory = () => {
   const [active, setActive] = useState("10");
   const [products, setProducts] = useState(null);
   const [loading, setLoading] = useState(true);
   const [productCategory, setProductCategory] = useState([]);
+
+  const [range, setRange] = useState(_range_number);
+  const [totalCount, setTotalCount] = useState(0);
+
+  const handleActive = (id) => {
+    setRange(_range_number);
+    setProducts([]);
+    setActive(id);
+  };
 
   useEffect(() => {
     const getProductCategory = async () => {
@@ -31,16 +42,23 @@ const ProductCategory = () => {
           .filter((item) => item.id !== "10")
           .map((item) => item.id);
 
-        const { data, error } = await supabase
+        const { data, error, count } = await supabase
           .from("products")
-          .select("*")
+          .select("*", {
+            count: "exact",
+          })
           .in("category_id", active === "10" ? allIds : [active])
           .order("created_at", { ascending: false })
-          .eq("is_active", true);
+          .eq("is_active", true)
+          .range(range - _range_number, range - 1);
 
         if (error) throw error;
-
-        setProducts(data || []);
+        if (range === _range_number) {
+          setProducts(data);
+        } else {
+          setProducts((prev) => [...prev, ...data] || []);
+        }
+        setTotalCount(count);
       } catch (error) {
         console.error(error);
         setProducts([]);
@@ -50,7 +68,7 @@ const ProductCategory = () => {
     };
 
     fetchProducts();
-  }, [active, productCategory]);
+  }, [active, productCategory, range]);
 
   return (
     <div className="overflow-hidden">
@@ -77,7 +95,7 @@ const ProductCategory = () => {
                         className={`${active === i?.id ? "backdrop-blur-xl bg-stone-400/30" : ""} 
                       rounded-lg 
                      text-left   transition-all duration-300 ease-in-out px-2 `}
-                        onClick={() => setActive(i?.id)}
+                        onClick={() => handleActive(i?.id)}
                       >
                         {i?.name}
                       </button>
@@ -89,18 +107,24 @@ const ProductCategory = () => {
         </div>
 
         <div className="col-span-4 md:col-span-5  grid  h-full overflow-y-auto ">
-          {loading === true && (
-            <div className="flex items-center justify-center h-full">
-              <Spinner className={"h-7 w-7"} />
-            </div>
-          )}
-          {!!products && loading === false && (
+          <>
             <div className=" grid grid-cols-1 md:grid-cols-5 p-4 gap-4 ">
               {products?.map((item, index) => {
                 return <ProductCard item={item} key={index} />;
               })}
             </div>
-          )}
+
+            {products && products.length < totalCount && loading === false && (
+              <div className="flex items-center justify-center pb-4  ">
+                <Button
+                  variant="outline"
+                  onClick={() => setRange((prev) => prev + _range_number)}
+                >
+                  Load More Items...
+                </Button>
+              </div>
+            )}
+          </>
         </div>
       </div>
     </div>
