@@ -1,4 +1,3 @@
-import react from "react";
 import { banner_url } from "@/assets/picture";
 
 const Banner = () => {

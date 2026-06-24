@@ -23,7 +23,9 @@ const ProductCategory = () => {
 
   useEffect(() => {
     const getProductCategory = async () => {
-      const { data } = await supabase.from("product_category").select("*");
+      const { data } = await supabase
+        .from("product_category")
+        .select("name, id");
       return data;
     };
     getProductCategory().then((res) => {
