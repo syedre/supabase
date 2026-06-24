@@ -1,6 +1,5 @@
 import { supabase } from "@/utils/supabase";
-// import { Button } from "@base-ui/react";
-import react, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { Spinner } from "./ui/spinner";
 
