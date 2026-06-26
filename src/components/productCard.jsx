@@ -33,7 +33,7 @@ const ProductCard = ({ item }) => {
     <div className="group grid grid-rows-2 rounded-3xl bg-white shadow-md transition-all duration-300 hover:shadow-2xl ">
       <div className="">
         <img
-          src={!!item.image_url ? base_url : obj[item]}
+          src={!!item?.image_url ? base_url : obj[item]}
           alt={`prod+${crypto.randomUUID()}`}
           className="h-62 w-full  object-fill transition-transform duration-500 "
         />
