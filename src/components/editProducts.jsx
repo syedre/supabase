@@ -37,7 +37,7 @@ const EditProducts = () => {
     <div className="grid grid-cols-1 md:grid-cols-4 gap-6 p-6 border border-stone-300 h-[80vh] overflow-y-auto">
       {!!prod &&
         prod?.map((item) => {
-          return <ProductCard i={item} key={item.id} />;
+          return <ProductCard item={item} key={item.id} />;
         })}
     </div>
   );
